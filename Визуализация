@@ -1,0 +1,43 @@
+import time
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+
+class HungarianAlgorithm:
+    def __init__(self, cost_matrix):
+        self.cost_matrix = np.array(cost_matrix)
+        self.n = len(cost_matrix)
+        self.m = len(cost_matrix[0]) if self.n > 0 else 0
+        self.row_covered = [False] * self.n
+        self.col_covered = [False] * self.m
+        self.marked = np.zeros((self.n, self.m), dtype=int)
+        
+    def compute(self):
+        # Основные шаги алгоритма здесь
+        # (реализация из предыдущих разделов)
+        pass
+
+# Анализ производительности
+sizes = [5, 10, 20, 50, 100]
+times = []
+
+for n in sizes:
+    # Генерируем случайную матрицу n×n
+    matrix = [[random.randint(1, 100) for _ in range(n)] for _ in range(n)]
+    
+    start_time = time.time()
+    hungarian = HungarianAlgorithm(matrix)
+    assignments = hungarian.compute()
+    elapsed = time.time() - start_time
+    
+    times.append(elapsed)
+    print(f"n={n}, время={elapsed:.4f} сек")
+
+# Построение графика
+plt.figure(figsize=(10, 6))
+plt.plot(sizes, times, 'o-')
+plt.xlabel('Размер матрицы (n)')
+plt.ylabel('Время выполнения (сек)')
+plt.title('Зависимость времени выполнения Венгерского алгоритма от размера матрицы')
+plt.grid(True)
+plt.show()
